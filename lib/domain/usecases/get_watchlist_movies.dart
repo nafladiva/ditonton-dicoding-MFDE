@@ -4,11 +4,11 @@ import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/common/failure.dart';
 
 class GetWatchlistMovies {
-  final MovieRepository _repository;
+  final MovieRepository repository;
 
-  GetWatchlistMovies(this._repository);
+  GetWatchlistMovies(this.repository);
 
   Future<Either<Failure, List<Movie>>> execute() {
-    return _repository.getWatchlistMovies();
+    return repository.getWatchlistMovies();
   }
 }
