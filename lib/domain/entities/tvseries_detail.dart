@@ -1,3 +1,4 @@
+import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/tvseries_detail_model.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';

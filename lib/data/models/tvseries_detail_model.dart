@@ -5,16 +5,12 @@ import 'package:equatable/equatable.dart';
 class TvSeriesDetailModel extends Equatable {
   TvSeriesDetailModel({
     required this.backdropPath,
-    required this.episodeRunTime,
     required this.firstAirDate,
     required this.genres,
     required this.homepage,
     required this.id,
-    required this.inProduction,
     required this.languages,
-    required this.lastAirDate,
     required this.name,
-    required this.nextEpisodeToAir,
     required this.numberOfEpisodes,
     required this.numberOfSeasons,
     required this.originCountry,
@@ -33,16 +29,12 @@ class TvSeriesDetailModel extends Equatable {
   });
 
   final String backdropPath;
-  final List<int> episodeRunTime;
   final String firstAirDate;
   final List<GenreModel> genres;
   final String homepage;
   final int id;
-  final bool inProduction;
   final List<String> languages;
-  final DateTime lastAirDate;
   final String name;
-  final dynamic nextEpisodeToAir;
   final int numberOfEpisodes;
   final int numberOfSeasons;
   final List<String> originCountry;
@@ -62,17 +54,13 @@ class TvSeriesDetailModel extends Equatable {
   factory TvSeriesDetailModel.fromJson(Map<String, dynamic> json) =>
       TvSeriesDetailModel(
         backdropPath: json["backdrop_path"],
-        episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
         firstAirDate: json["first_air_date"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
-        inProduction: json["in_production"],
         languages: List<String>.from(json["languages"].map((x) => x)),
-        lastAirDate: DateTime.parse(json["last_air_date"]),
         name: json["name"],
-        nextEpisodeToAir: json["next_episode_to_air"],
         numberOfEpisodes: json["number_of_episodes"],
         numberOfSeasons: json["number_of_seasons"],
         originCountry: List<String>.from(json["origin_country"].map((x) => x)),
@@ -94,17 +82,12 @@ class TvSeriesDetailModel extends Equatable {
 
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath,
-        "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
         "first_air_date": firstAirDate,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
-        "in_production": inProduction,
         "languages": List<dynamic>.from(languages.map((x) => x)),
-        "last_air_date":
-            "${lastAirDate.year.toString().padLeft(4, '0')}-${lastAirDate.month.toString().padLeft(2, '0')}-${lastAirDate.day.toString().padLeft(2, '0')}",
         "name": name,
-        "next_episode_to_air": nextEpisodeToAir,
         "number_of_episodes": numberOfEpisodes,
         "number_of_seasons": numberOfSeasons,
         "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
@@ -126,16 +109,12 @@ class TvSeriesDetailModel extends Equatable {
   @override
   List<Object?> get props => [
         backdropPath,
-        episodeRunTime,
         firstAirDate,
         genres,
         homepage,
         id,
-        inProduction,
         languages,
-        lastAirDate,
         name,
-        nextEpisodeToAir,
         numberOfEpisodes,
         numberOfSeasons,
         originCountry,

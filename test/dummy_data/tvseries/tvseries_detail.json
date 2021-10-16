@@ -1,0 +1,33 @@
+{
+    "backdrop_path": "/path.jpg",
+    "first_air_date": "2017-05-02",
+    "genres": [
+        {
+            "id": 1,
+            "name": "Crime"
+        }
+    ],
+    "homepage": "https://www.netflix.com",
+    "id": 1,
+    "languages": [
+        "es"
+    ],
+    "name": "Name",
+    "number_of_episodes": 3,
+    "number_of_seasons": 1,
+    "origin_country": [
+        "ES"
+    ],
+    "original_language": "es",
+    "original_name": "Original",
+    "overview": "overview",
+    "popularity": 80,
+    "poster_path": "/path.jpg",
+    "seasons": [],
+    "spoken_languages": [],
+    "status": "Returning Series",
+    "tagline": "Tagline",
+    "type": "Scripted",
+    "vote_average": 1.0,
+    "vote_count": 100
+    }
