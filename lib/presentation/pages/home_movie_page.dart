@@ -94,9 +94,23 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'MOVIES',
-                    style: kHeading5,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(6.0),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 4.0, horizontal: 30.0),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[700],
+                      ),
+                      child: Text(
+                        'Movies',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

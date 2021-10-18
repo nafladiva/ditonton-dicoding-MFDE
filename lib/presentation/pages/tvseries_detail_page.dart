@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tvseries.dart';
 import 'package:ditonton/domain/entities/tvseries_detail.dart';
@@ -191,7 +190,7 @@ class DetailContent extends StatelessWidget {
                             Column(
                               children: <Widget>[
                                 ...tvSeries.seasons.map((item) {
-                                  return SeasonCard(item);
+                                  return SeasonCard(item, tvSeries.id);
                                 }).toList(),
                               ],
                             ),
@@ -218,35 +217,7 @@ class DetailContent extends StatelessWidget {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         final tv = recommendations[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                TvSeriesDetailPage.ROUTE_NAME,
-                                                arguments: tv.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${tv.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
+                                        return RecommendationContentTv(tv: tv);
                                       },
                                       itemCount: recommendations.length,
                                     ),
@@ -306,15 +277,40 @@ class DetailContent extends StatelessWidget {
 
     return result.substring(0, result.length - 2);
   }
+}
 
-  String _showDuration(int runtime) {
-    final int hours = runtime ~/ 60;
-    final int minutes = runtime % 60;
+class RecommendationContentTv extends StatelessWidget {
+  const RecommendationContentTv({
+    required this.tv,
+  });
 
-    if (hours > 0) {
-      return '${hours}h ${minutes}m';
-    } else {
-      return '${minutes}m';
-    }
+  final TvSeries tv;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushReplacementNamed(
+            context,
+            TvSeriesDetailPage.ROUTE_NAME,
+            arguments: tv.id,
+          );
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: 'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(),
+            ),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
+        ),
+      ),
+    );
   }
 }

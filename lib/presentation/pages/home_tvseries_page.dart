@@ -95,9 +95,23 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'TV SERIES',
-                    style: kHeading5,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(6.0),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 4.0, horizontal: 30.0),
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[700],
+                      ),
+                      child: Text(
+                        'Tv Series',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

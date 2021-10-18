@@ -1,5 +1,4 @@
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/data/models/tvseries_detail_model.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_tvseries_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
@@ -19,6 +18,7 @@ import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/popular_tvseries_notifier.dart';
+import 'package:ditonton/presentation/provider/tvseries/season_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/top_rated_tvseries_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/tvseries_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/tvseries_list_notifier.dart';
@@ -63,6 +63,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<SeasonDetailNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesSearchNotifier>(),
@@ -114,9 +117,10 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             case SeasonDetailPage.ROUTE_NAME:
-              final season = settings.arguments as Season;
+              List<dynamic> arg = settings.arguments as List<dynamic>;
               return CupertinoPageRoute(
-                builder: (_) => SeasonDetailPage(season: season),
+                builder: (_) =>
+                    SeasonDetailPage(tvId: arg[0], seasonNum: arg[1]),
                 settings: settings,
               );
             case SearchPage.ROUTE_NAME:

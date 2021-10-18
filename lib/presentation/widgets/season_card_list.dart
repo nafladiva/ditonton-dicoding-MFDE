@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class SeasonCard extends StatelessWidget {
   final Season season;
+  final int tvId;
 
-  SeasonCard(this.season);
+  SeasonCard(this.season, this.tvId);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class SeasonCard extends StatelessWidget {
           Navigator.pushNamed(
             context,
             SeasonDetailPage.ROUTE_NAME,
-            arguments: season,
+            arguments: [tvId, season.seasonNumber],
           );
         },
         child: ClipRRect(
@@ -76,6 +77,21 @@ class SeasonCard extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: Colors.yellow[800],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: RichText(
+                            text: TextSpan(children: [
+                              TextSpan(text: 'See more'),
+                              WidgetSpan(
+                                alignment: PlaceholderAlignment.middle,
+                                child: Icon(
+                                  Icons.arrow_right,
+                                  size: 26,
+                                ),
+                              ),
+                            ]),
                           ),
                         ),
                       ],

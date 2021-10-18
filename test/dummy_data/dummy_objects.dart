@@ -1,8 +1,11 @@
 import 'package:ditonton/data/models/movie_table.dart';
+import 'package:ditonton/data/models/season_model.dart';
+import 'package:ditonton/data/models/tvseries_detail_model.dart';
 import 'package:ditonton/data/models/tvseries_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/season_detail.dart';
 import 'package:ditonton/domain/entities/tvseries.dart';
 import 'package:ditonton/domain/entities/tvseries_detail.dart';
 
@@ -84,6 +87,52 @@ final testTvSeriesDetail = TvSeriesDetail(
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Crime')],
   seasons: [],
+  id: 1,
+  name: 'name',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  firstAirDate: 'firstAirDate',
+  voteAverage: 1,
+  voteCount: 1,
+);
+
+final testSeasonDetail = SeasonDetail(
+  id: 'id',
+  airDate: 'airDate',
+  episodes: [
+    Episode(
+      airDate: "airDate",
+      episodeNumber: 1,
+      id: 1,
+      name: "name",
+      overview: "overview",
+      productionCode: "productionCode",
+      seasonNumber: 1,
+      stillPath: "stillPath",
+      voteAverage: 1.0,
+      voteCount: 1,
+    ),
+  ],
+  name: 'name',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  seasonNumber: 1,
+);
+
+final testTvSeriesDetailWithSeason = TvSeriesDetail(
+  backdropPath: 'backdropPath',
+  genres: [Genre(id: 1, name: 'Crime')],
+  seasons: [
+    Season(
+      airDate: 'airDate',
+      episodeCount: 1,
+      id: 1,
+      name: 'name',
+      overview: 'overview',
+      posterPath: 'posterPath',
+      seasonNumber: 1,
+    ),
+  ],
   id: 1,
   name: 'name',
   overview: 'overview',

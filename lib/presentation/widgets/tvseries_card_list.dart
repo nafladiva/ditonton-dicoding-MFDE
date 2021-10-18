@@ -14,6 +14,7 @@ class TvSeriesCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
+        key: Key('tvSeriesCard'),
         onTap: () {
           Navigator.pushNamed(
             context,

@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:ditonton/data/models/tvseries_detail_model.dart';
 import 'package:ditonton/data/models/tvseries_model.dart';
 import 'package:ditonton/data/repositories/tvseries_repository_impl.dart';
@@ -207,7 +208,6 @@ void main() {
       popularity: 1.0,
       posterPath: 'posterPath',
       seasons: [],
-      spokenLanguages: [],
       status: 'status',
       tagline: 'tagline',
       type: 'type',
@@ -251,6 +251,74 @@ void main() {
       final result = await repository.getTvSeriesDetail(tId);
       // assert
       verify(mockRemoteDataSource.getTvSeriesDetail(tId));
+      expect(result,
+          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
+  });
+
+  group('Get Tv Series season detail', () {
+    final tTvId = 1;
+    final tSeasonNum = 1;
+    final tSeasonResponse = SeasonModel(
+      id: 'id',
+      airDate: 'airDate',
+      episodes: [
+        Episode(
+          airDate: "airDate",
+          episodeNumber: 1,
+          id: 1,
+          name: "name",
+          overview: "overview",
+          productionCode: "productionCode",
+          seasonNumber: 1,
+          stillPath: "stillPath",
+          voteAverage: 1.0,
+          voteCount: 1,
+        ),
+      ],
+      name: 'name',
+      overview: 'overview',
+      seasonModelId: 1,
+      posterPath: 'posterPath',
+      seasonNumber: 1,
+    );
+
+    test(
+        'should return Tv series season data when the call to remote data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getSeasonDetail(tTvId, tSeasonNum))
+          .thenAnswer((_) async => tSeasonResponse);
+      // act
+      final result = await repository.getSeasonDetail(tTvId, tSeasonNum);
+      // assert
+      verify(mockRemoteDataSource.getSeasonDetail(tTvId, tSeasonNum));
+      expect(result, equals(Right(testSeasonDetail)));
+    });
+
+    test(
+        'should return Server Failure when the call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getSeasonDetail(tTvId, tSeasonNum))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getSeasonDetail(tTvId, tSeasonNum);
+      // assert
+      verify(mockRemoteDataSource.getSeasonDetail(tTvId, tSeasonNum));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
+
+    test(
+        'should return connection failure when the device is not connected to internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getSeasonDetail(tTvId, tSeasonNum))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.getSeasonDetail(tTvId, tSeasonNum);
+      // assert
+      verify(mockRemoteDataSource.getSeasonDetail(tTvId, tSeasonNum));
       expect(result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });

@@ -204,35 +204,8 @@ class DetailContent extends StatelessWidget {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         final movie = recommendations[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                MovieDetailPage.ROUTE_NAME,
-                                                arguments: movie.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
+                                        return RecommendationContent(
+                                            movie: movie);
                                       },
                                       itemCount: recommendations.length,
                                     ),
@@ -302,5 +275,42 @@ class DetailContent extends StatelessWidget {
     } else {
       return '${minutes}m';
     }
+  }
+}
+
+class RecommendationContent extends StatelessWidget {
+  const RecommendationContent({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushReplacementNamed(
+            context,
+            MovieDetailPage.ROUTE_NAME,
+            arguments: movie.id,
+          );
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(),
+            ),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
+        ),
+      ),
+    );
   }
 }

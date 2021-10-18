@@ -20,7 +20,6 @@ class TvSeriesDetailModel extends Equatable {
     required this.popularity,
     required this.posterPath,
     required this.seasons,
-    required this.spokenLanguages,
     required this.status,
     required this.tagline,
     required this.type,
@@ -44,7 +43,6 @@ class TvSeriesDetailModel extends Equatable {
   final double popularity;
   final String posterPath;
   final List<Season> seasons;
-  final List<SpokenLanguage> spokenLanguages;
   final String status;
   final String tagline;
   final String type;
@@ -71,8 +69,6 @@ class TvSeriesDetailModel extends Equatable {
         posterPath: json["poster_path"],
         seasons:
             List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
-        spokenLanguages: List<SpokenLanguage>.from(
-            json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
         status: json["status"],
         tagline: json["tagline"],
         type: json["type"],
@@ -97,8 +93,6 @@ class TvSeriesDetailModel extends Equatable {
         "popularity": popularity,
         "poster_path": posterPath,
         "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
-        "spoken_languages":
-            List<dynamic>.from(spokenLanguages.map((x) => x.toJson())),
         "status": status,
         "tagline": tagline,
         "type": type,
@@ -124,7 +118,6 @@ class TvSeriesDetailModel extends Equatable {
         popularity,
         posterPath,
         seasons,
-        spokenLanguages,
         status,
         tagline,
         type,
@@ -148,7 +141,7 @@ class TvSeriesDetailModel extends Equatable {
   }
 }
 
-class Season {
+class Season extends Equatable {
   Season({
     required this.airDate,
     required this.episodeCount,
@@ -197,28 +190,15 @@ class Season {
         posterPath: this.posterPath,
         seasonNumber: this.seasonNumber);
   }
-}
 
-class SpokenLanguage {
-  SpokenLanguage({
-    required this.englishName,
-    required this.iso6391,
-    required this.name,
-  });
-
-  final String englishName;
-  final String iso6391;
-  final String name;
-
-  factory SpokenLanguage.fromJson(Map<String, dynamic> json) => SpokenLanguage(
-        englishName: json["english_name"],
-        iso6391: json["iso_639_1"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "english_name": englishName,
-        "iso_639_1": iso6391,
-        "name": name,
-      };
+  @override
+  List<Object?> get props => [
+        airDate,
+        episodeCount,
+        id,
+        name,
+        overview,
+        posterPath,
+        seasonNumber,
+      ];
 }

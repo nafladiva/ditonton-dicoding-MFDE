@@ -16,6 +16,7 @@ import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/domain/usecases/tvseries/get_now_playing_tvseries.dart';
+import 'package:ditonton/domain/usecases/tvseries/get_season_detail.dart';
 import 'package:ditonton/domain/usecases/tvseries/get_watchlist_status_tv.dart';
 import 'package:ditonton/domain/usecases/tvseries/remove_watchlist_tv.dart';
 import 'package:ditonton/domain/usecases/tvseries/save_watchlist_tv.dart';
@@ -25,6 +26,7 @@ import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/popular_tvseries_notifier.dart';
+import 'package:ditonton/presentation/provider/tvseries/season_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/top_rated_tvseries_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/tvseries_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tvseries/tvseries_list_notifier.dart';
@@ -161,12 +163,18 @@ void init() {
       getWatchlistTvSeries: locator(),
     ),
   );
+  locator.registerFactory(
+    () => SeasonDetailNotifier(
+      getSeasonDetail: locator(),
+    ),
+  );
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingTvSeries(locator()));
   locator.registerLazySingleton(() => GetPopularTvSeries(locator()));
   locator.registerLazySingleton(() => GetTopRatedTvSeries(locator()));
   locator.registerLazySingleton(() => GetTvSeriesDetail(locator()));
+  locator.registerLazySingleton(() => GetSeasonDetail(locator()));
   locator.registerLazySingleton(() => GetTvSeriesRecommendations(locator()));
   locator.registerLazySingleton(() => SearchTvSeries(locator()));
   locator.registerLazySingleton(() => GetWatchListStatusTvSeries(locator()));
