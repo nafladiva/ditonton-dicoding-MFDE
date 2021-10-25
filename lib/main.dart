@@ -1,34 +1,37 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/home_tvseries_page.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/popular_tvseries_page.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/search_tvseries_page.dart';
-import 'package:ditonton/presentation/pages/season_detail_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_tvseries_page.dart';
-import 'package:ditonton/presentation/pages/tvseries_detail_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_page.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tvseries/popular_tvseries_notifier.dart';
-import 'package:ditonton/presentation/provider/tvseries/season_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tvseries/top_rated_tvseries_notifier.dart';
-import 'package:ditonton/presentation/provider/tvseries/tvseries_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tvseries/tvseries_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tvseries/tvseries_search_notifier.dart';
-import 'package:ditonton/presentation/provider/tvseries/watchlist_tvseries_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:core/bloc/search_bloc.dart';
+// import 'package:core/common/constants.dart';
+import 'package:core/core.dart';
+import 'package:about/about.dart';
+import 'package:core/presentation/pages/home_tvseries_page.dart';
+import 'package:core/presentation/pages/movie_detail_page.dart';
+import 'package:core/presentation/pages/home_movie_page.dart';
+import 'package:core/presentation/pages/popular_movies_page.dart';
+import 'package:core/presentation/pages/popular_tvseries_page.dart';
+import 'package:core/presentation/pages/search_page.dart';
+import 'package:core/presentation/pages/search_tvseries_page.dart';
+import 'package:core/presentation/pages/season_detail_page.dart';
+import 'package:core/presentation/pages/top_rated_movies_page.dart';
+import 'package:core/presentation/pages/top_rated_tvseries_page.dart';
+import 'package:core/presentation/pages/tvseries_detail_page.dart';
+import 'package:core/presentation/pages/watchlist_page.dart';
+import 'package:core/presentation/provider/movie_detail_notifier.dart';
+import 'package:core/presentation/provider/movie_list_notifier.dart';
+import 'package:core/presentation/provider/movie_search_notifier.dart';
+import 'package:core/presentation/provider/popular_movies_notifier.dart';
+import 'package:core/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:core/presentation/provider/tvseries/popular_tvseries_notifier.dart';
+import 'package:core/presentation/provider/tvseries/season_detail_notifier.dart';
+import 'package:core/presentation/provider/tvseries/top_rated_tvseries_notifier.dart';
+import 'package:core/presentation/provider/tvseries/tvseries_detail_notifier.dart';
+import 'package:core/presentation/provider/tvseries/tvseries_list_notifier.dart';
+import 'package:core/presentation/provider/tvseries/tvseries_search_notifier.dart';
+import 'package:core/presentation/provider/tvseries/watchlist_tvseries_notifier.dart';
+import 'package:core/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:ditonton/injection.dart' as di;
+import './injection.dart' as di;
 
 void main() {
   di.init();
@@ -78,6 +81,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvSeriesNotifier>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SearchBloc>(),
         ),
       ],
       child: MaterialApp(
