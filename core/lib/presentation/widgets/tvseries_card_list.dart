@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/domain/entities/tvseries.dart';
-import 'package:core/presentation/pages/tvseries_detail_page.dart';
+import 'package:detail/presentation/pages/tvseries_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:core/styles/text_styles.dart';
 

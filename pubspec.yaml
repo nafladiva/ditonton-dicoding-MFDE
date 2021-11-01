@@ -31,6 +31,16 @@ dependencies:
     path: about
   core:
     path: core
+  popular:
+    path: popular
+  toprated:
+    path: top_rated
+  search:
+    path: search
+  detail:
+    path: detail
+  firebase_core: ^1.6.0
+  firebase_crashlytics: ^2.2.4
 
 dev_dependencies:
   mockito: ^5.0.8

@@ -26,6 +26,13 @@ dependencies:
   rxdart: ^0.27.1
   about:
     path: ../about
+  popular:
+    path: ../popular
+  toprated:
+    path: ../top_rated
+  detail:
+    path: ../detail
+  firebase_crashlytics: ^2.2.4
 
 dev_dependencies:
   flutter_test:

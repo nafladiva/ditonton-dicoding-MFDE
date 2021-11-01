@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/data/models/tvseries_detail_model.dart';
-import 'package:core/presentation/pages/season_detail_page.dart';
+import 'package:detail/presentation/pages/season_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class SeasonCard extends StatelessWidget {
