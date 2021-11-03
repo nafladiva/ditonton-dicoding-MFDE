@@ -38,6 +38,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import './injection.dart' as di;
 
 void main() async {
@@ -122,7 +123,18 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: HomeMoviePage(),
+        home: FutureBuilder(
+          future: GetIt.instance.allReady(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return HomeMoviePage();
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case HOME_MOVIES_ROUTE:

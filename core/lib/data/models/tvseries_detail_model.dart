@@ -27,7 +27,7 @@ class TvSeriesDetailModel extends Equatable {
     required this.voteCount,
   });
 
-  final String backdropPath;
+  final String? backdropPath;
   final String firstAirDate;
   final List<GenreModel> genres;
   final String homepage;
@@ -51,7 +51,7 @@ class TvSeriesDetailModel extends Equatable {
 
   factory TvSeriesDetailModel.fromJson(Map<String, dynamic> json) =>
       TvSeriesDetailModel(
-        backdropPath: json["backdrop_path"],
+        backdropPath: json["backdrop_path"] ?? '',
         firstAirDate: json["first_air_date"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core/presentation/bloc/watchlist/watchlist_bloc.dart';
 import 'package:core/presentation/bloc/list/movies/now_playing_movie_list_bloc.dart';
 import 'package:core/presentation/bloc/list/movies/popular_movie_list_bloc.dart';
@@ -12,6 +14,7 @@ import 'package:detail/presentation/bloc/recommendation/recommendation_tv_bloc.d
 import 'package:detail/presentation/bloc/season_tvseries/season_tv_bloc.dart';
 import 'package:detail/presentation/bloc/watchlist_status/watchlist_status_bloc.dart';
 import 'package:detail/presentation/bloc/watchlist_status/watchlist_status_tv_bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:popular/presentation/bloc/popular_bloc.dart';
 import 'package:popular/presentation/bloc/popular_tv_bloc.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
@@ -41,6 +44,7 @@ import 'package:core/domain/usecases/tvseries/get_watchlist_status_tv.dart';
 import 'package:core/domain/usecases/tvseries/remove_watchlist_tv.dart';
 import 'package:core/domain/usecases/tvseries/save_watchlist_tv.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:core/data/repositories/tvseries_repository_impl.dart';
@@ -90,6 +94,19 @@ void init() {
 
   // external
   locator.registerLazySingleton(() => http.Client());
+  locator.registerSingletonAsync<IOClient>(() async {
+    final sslCert =
+        await rootBundle.load('assets/certificates/certificate.pem');
+    SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
+    securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
+
+    final HttpClient httpClient = HttpClient(context: securityContext);
+    httpClient.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => false;
+    var client = IOClient(httpClient);
+
+    return client;
+  });
 
   //bloc
   locator.registerFactory(
