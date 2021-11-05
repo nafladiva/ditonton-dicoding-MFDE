@@ -38,16 +38,39 @@ class _WatchlistPageState extends State<WatchlistPage> {
             } else if (state is WatchlistHasData) {
               final result = state.result;
               final resultTv = state.resultTv;
-              return ListView(
-                children: <Widget>[
-                  ...result.map((movie) {
-                    return MovieCard(movie);
-                  }).toList(),
-                  ...resultTv.map((tvSeries) {
-                    return TvSeriesCard(tvSeries);
-                  }).toList(),
-                ],
-              );
+              if (result.length == 0 && resultTv.length == 0) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Icon(
+                          Icons.live_tv_rounded,
+                          size: 100.0,
+                        ),
+                      ),
+                      Text(
+                        "You haven't added a watchlist yet",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return ListView(
+                  children: <Widget>[
+                    ...result.map((movie) {
+                      return MovieCard(movie);
+                    }).toList(),
+                    ...resultTv.map((tvSeries) {
+                      return TvSeriesCard(tvSeries);
+                    }).toList(),
+                  ],
+                );
+              }
             } else if (state is WatchlistError) {
               return Expanded(
                 child: Center(
