@@ -232,6 +232,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.0"
+  detail:
+    dependency: transitive
+    description:
+      path: "../detail"
+      relative: true
+    source: path
+    version: "0.0.1"
   equatable:
     dependency: "direct main"
     description:
@@ -752,7 +759,7 @@ packages:
   toprated:
     dependency: transitive
     description:
-      path: "../toprated"
+      path: "../top_rated"
       relative: true
     source: path
     version: "0.0.1"
